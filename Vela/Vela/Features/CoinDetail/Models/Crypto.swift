@@ -19,5 +19,4 @@ struct Crypto : Identifiable {
     let chartData : [Double]
     let icon : String
     let gradient : [Color]
-    
 }
