@@ -1,18 +1,8 @@
-//
-//  SearchOverlay.swift
-//  Vela
-//
-//  Created by Manuel Alejandro Hernandez Marín on 14/01/26.
-//
-
 import Foundation
 import SwiftUI
-
 struct SearchOverlay : View {
-    
     @Binding var searchText : String
     @Binding var isPresented : Bool
-    
     var body : some View {
         ZStack {
             Color.black.opacity(0.5)
@@ -23,17 +13,14 @@ struct SearchOverlay : View {
                         searchText = ""
                     }
                 }
-            
             VStack {
                 HStack(spacing : 12){
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.white.opacity(0.6))
-                    
                     TextField("Buscar divisa...", text: $searchText)
                         .foregroundStyle(.white)
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
-                    
                     if !searchText.isEmpty {
                         Button {
                             searchText = ""
@@ -42,7 +29,6 @@ struct SearchOverlay : View {
                                 .foregroundStyle(.white.opacity(0.6))
                         }
                     }
-                    
                     Button {
                         withAnimation(.spring(response : 0.3)){
                             isPresented = false
@@ -70,11 +56,10 @@ struct SearchOverlay : View {
         .transition(.opacity)
     }
 }
-
-
 #Preview {
     SearchOverlay(
         searchText: .constant("bitcoin"),
         isPresented: .constant(false)
     )
 }
+ 

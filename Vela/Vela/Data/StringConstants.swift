@@ -1,14 +1,5 @@
-//
-//  StringConstants.swift
-//  Vela
-//
-//  Created by Manuel Alejandro Hernandez Marín on 09/01/26.
-//
-
 import Foundation
 import SwiftUI
-
-
 let cryptos = [
     Crypto(name: "Bitcoin", symbol: "BTC", price: 43250.00, change24h: 5.4,
            volume: "$28.5B", marketCap: "$845B",
