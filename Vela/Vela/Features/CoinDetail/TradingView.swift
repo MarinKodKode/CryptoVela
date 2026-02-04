@@ -14,6 +14,7 @@ struct TradingView : View {
     @State private var selectedCharType : ChartType = .line
     @State private var selectedTimeFrame : TimeFrame = .oneDay
     @State private var selectedTab : ViewTabs = .history
+    let padding = (highPrice - lowPrice) * 0.05
     
     var body: some View {
         ZStack {
@@ -159,7 +160,8 @@ struct TradingView : View {
                 
                 AreaMark(
                     x: .value("Time", point.timestamp),
-                    y: .value("Price", point.price)
+                    yStart: .value("Min", lowPrice),
+                    yEnd: .value("prive", point.price)
                 )
                 .foregroundStyle(
                     LinearGradient(
@@ -171,6 +173,7 @@ struct TradingView : View {
                         endPoint: .bottom
                     )
                 )
+                
             }
         }
         .chartXAxis(.hidden)
@@ -185,7 +188,12 @@ struct TradingView : View {
                 }
             }
         }
-        .chartYScale(domain: lowPrice...highPrice)
+        .chartYScale(
+            domain: (lowPrice - padding)...(highPrice + padding)
+        )
+        .chartPlotStyle { plotArea in
+            plotArea.clipped()
+        }
     }
     
     var candlestickChartView : some View {
@@ -195,7 +203,7 @@ struct TradingView : View {
                     x : .value("Time", candle.timestamp),
                     yStart: .value("Low", candle.low),
                     yEnd: .value("High", candle.high),
-                    width: 2
+                    width: 20
                 )
                 
                 RectangleMark(

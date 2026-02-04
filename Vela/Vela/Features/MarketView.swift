@@ -24,8 +24,6 @@ struct MarketView : View {
             .ignoresSafeArea()
             
             VStack(spacing : 0) {
-                
-                // Header
                 HStack {
                     Circle()
                         .fill(Color(hex : "00D9A3"))
