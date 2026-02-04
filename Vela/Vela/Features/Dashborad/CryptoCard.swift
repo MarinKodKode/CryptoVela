@@ -29,8 +29,10 @@ struct CryptoCard: View {
     @State private var isPressed : Bool = false
     
     var body: some View {
-        
-        ZStack {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+            
+            ZStack {
                 VStack {
                     HStack {
                         HStack {
@@ -74,13 +76,9 @@ struct CryptoCard: View {
                             }
                         }
                         .padding(.horizontal, 24)
-
                         Spacer()
                     }
-                    
                 }
-                
-            
                 HStack {
                     VStack {
                         
@@ -119,25 +117,25 @@ struct CryptoCard: View {
                     .frame(width: 150, height: 80)
                 }
                 .zIndex(10)
-        }
-        .frame(width: 360, height: 180)
-        .background(
-            RoundedRectangle(cornerRadius: 15)
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 0.20, green: 0.28, blue: 0.38),
-                            Color(red: 0.10, green: 0.14, blue: 0.20)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+            }
+            .frame(width: width, height: 160)
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.20, green: 0.28, blue: 0.38),
+                                Color(red: 0.10, green: 0.14, blue: 0.20)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                     )
-                )
-        )
-        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
-  
+            )
+            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+        }
+        .frame(height: 160)
     }
-        
 }
 
 #Preview {

@@ -9,10 +9,14 @@ import SwiftUI
 
 struct SavedView: View {
     var body: some View {
-        VStack {
-            Text("Guardados")
+        ZStack {
+            LinearGradient(colors:[ Color(hex: "031449"),
+                                    Color(hex: "0F3319")], startPoint: .topLeading, endPoint: .bottomTrailing)
+            .ignoresSafeArea()
+            Text("Saved")
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .foregroundStyle(.white)
         }
     }
 }
