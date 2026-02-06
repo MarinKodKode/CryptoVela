@@ -11,6 +11,9 @@ import Charts
 
 struct MarketView : View {
     
+    @EnvironmentObject var navigationRouter : NavigationRouter
+    
+    
     @State var selectedCategory = "ALTS"
     @State var selectedCrypto = "ETH"
     
@@ -153,6 +156,15 @@ struct MarketView : View {
                     VStack {
                         ForEach(cryptoData){ crypto in
                             CryptoRows(crypto : crypto)
+                                .padding(.top, 8)
+                                .onTapGesture {
+                                    print("Crypto selected - \(crypto.name)")
+                                    navigationRouter
+                                        .goTo(
+                                            .crypto_detail(crypto: crypto.name)
+                                        )
+                                }
+                            
                         }
                     }
                 }

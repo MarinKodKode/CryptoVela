@@ -23,7 +23,6 @@ struct TradingView : View {
                 .ignoresSafeArea()
             
             ScrollView(.vertical, showsIndicators: false) {
-                headerView
                 
                 priceInfoView
                 
@@ -37,46 +36,13 @@ struct TradingView : View {
                 
                 historyView
                 
-                ordersView
+                
                 
                 actionButtons
             }
+            .navigationTitle("BTC/USDT")
             
         }
-    }
-    
-    var headerView : some View {
-        HStack {
-            Button(action : {}){
-                Image(systemName: "chevron.left")
-                    .foregroundStyle(.white)
-                    .font(.title2)
-            }
-            
-            Text("BTC/USDT")
-                .font(.system(size : 20, weight: .semibold))
-                .foregroundStyle(.white)
-            
-            Spacer()
-            
-            Button(action: {}){
-                Image(systemName: "star.fill")
-                    .foregroundStyle(.white)
-            }
-            
-            Button(action : {}){
-                Image(systemName: "paperplane")
-                    .foregroundStyle(.white)
-            }
-            
-            Button(action : {}){
-                Image(systemName: "ellipsis")
-                    .foregroundStyle(.white)
-                    .fontWeight(.semibold)
-            }
-        }
-        .padding()
-        
     }
     
     var priceInfoView : some View {
@@ -339,56 +305,6 @@ struct TradingView : View {
             }
         }
     
-    var ordersView: some View {
-            VStack(spacing: 0) {
-                HStack {
-                    Text("Bid")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(red: 0.5, green: 0.55, blue: 0.6))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Spacer()
-                    
-                    Text("Ask")
-                        .font(.system(size: 13))
-                        .foregroundColor(Color(red: 0.5, green: 0.55, blue: 0.6))
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .padding()
-                
-                ForEach(orderBook) { order in
-                    HStack {
-                        if order.side == .bid {
-                            Text(order.quantity)
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text(order.price)
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Color(red: 0.0, green: 0.8, blue: 0.6))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Spacer()
-                        } else {
-                            Spacer()
-                            
-                            Text(order.price)
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(Color(red: 0.9, green: 0.3, blue: 0.3))
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                            
-                            Text(order.quantity)
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 12)
-                }
-            }
-        }
     
     var actionButtons: some View {
             HStack(spacing: 12) {
@@ -399,16 +315,6 @@ struct TradingView : View {
                         .frame(width: 50, height: 50)
                         .background(Color(red: 0.2, green: 0.21, blue: 0.25))
                         .clipShape(Circle())
-                }
-                
-                Button(action: {}) {
-                    Text("Sell")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color(red: 0.2, green: 0.21, blue: 0.25))
-                        .cornerRadius(25)
                 }
                 
                 Button(action: {}) {
@@ -429,33 +335,6 @@ struct TradingView : View {
                         .clipShape(Circle())
                 }
                 
-                Button(action: {}) {
-                    Image(systemName: "slider.horizontal.3")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .frame(width: 50, height: 50)
-                        .background(Color(red: 0.2, green: 0.21, blue: 0.25))
-                        .clipShape(Circle())
-                }
-                
-                Button(action: {}) {
-                    Text("Buy")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color(red: 0.0, green: 0.8, blue: 0.6))
-                        .cornerRadius(25)
-                }
-                
-                Button(action: {}) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .frame(width: 50, height: 50)
-                        .background(Color(red: 0.2, green: 0.21, blue: 0.25))
-                        .clipShape(Circle())
-                }
             }
             .padding(.horizontal)
         }
