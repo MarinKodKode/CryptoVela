@@ -11,6 +11,10 @@ import Charts
 
 struct MarketView : View {
     
+    @EnvironmentObject var navigationRouter : NavigationRouter
+    
+    private let vm = DashboardViewModel()
+    
     @State var selectedCategory = "ALTS"
     @State var selectedCrypto = "ETH"
     
@@ -151,10 +155,24 @@ struct MarketView : View {
                 
                 ScrollView() {
                     VStack {
-                        ForEach(cryptoData){ crypto in
+                        ForEach(vm.coins){ crypto in
                             CryptoRows(crypto : crypto)
+                                .padding(.top, 8)
+                                .onTapGesture {
+                                    print("Crypto selected - \(crypto.name)")
+                                    navigationRouter
+                                        .goTo(
+                                            .crypto_detail(crypto: crypto.name)
+                                        )
+                                }
+                            
                         }
                     }
+                }
+            }
+            .onAppear{
+                Task {
+                    await vm.initView()
                 }
             }
         }
@@ -163,7 +181,7 @@ struct MarketView : View {
 
 struct CryptoRows : View {
     
-    let crypto : CryptoItem
+    let crypto : Coin
     
     var body: some View {
         HStack(spacing : 12){

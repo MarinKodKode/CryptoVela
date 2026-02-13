@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct VelaApp: App {
+    
+    @StateObject private var navigationRouter = NavigationRouter()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(navigationRouter)
         }
     }
 }
