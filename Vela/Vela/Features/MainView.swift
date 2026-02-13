@@ -62,8 +62,7 @@ struct ContentMainView : View {
         TabView {
             Tab.init("Market", systemImage: "ring.dashed"){
                 NavigationStack {
-//                    MarketView()
-                    DashboardViews()
+                    MarketView()
                 }
             }
             Tab.init("Saved", systemImage: "bookmark.fill"){

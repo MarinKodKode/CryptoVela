@@ -65,24 +65,6 @@ final class CryptoService: CryptoServiceProtocol {
 }
 
 
-struct Coin: Decodable, Identifiable {
-    let uuid: String
-    let symbol: String
-    let name: String
-    let price: String
-    let change: String
-    let marketCap: String?
-    let volume24h: String?
-
-    var id: String { uuid }
-}
-
-// MARK: - Containers
-
-struct CoinsContainer: Decodable {
-    let coins: [Coin]
-}
-
 struct CoinContainer: Decodable {
     let coin: Coin
 }
@@ -91,10 +73,7 @@ struct HistoryContainer: Decodable {
     let history: [HistoryPoint]
 }
 
-struct CoinRankingResponse<T: Decodable>: Decodable {
-    let status: String
-    let data: T
-}
+
 
 enum HistoryInterval: String, CaseIterable {
     case m15 = "15m"

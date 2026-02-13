@@ -67,7 +67,7 @@ final class FavoritesViewModel: ObservableObject {
             try await withThrowingTaskGroup(of: Coin.self) { group in
                 for uuid in favoriteUUIDs {
                     group.addTask {
-                        try await self.cryptoService.fetchCoin(uuid: uuid)
+                        try await self.cryptoService.fetchCoin(by: uuid)
                     }
                 }
 

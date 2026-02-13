@@ -23,6 +23,9 @@ final class DashboardViewModel: ObservableObject {
     private let cryptoService: CryptoServiceProtocol
     private var cancellables = Set<AnyCancellable>()
 
+    
+
+    
     // MARK: - Filtered coins
 
     var filteredCoins: [Coin] {
@@ -38,6 +41,11 @@ final class DashboardViewModel: ObservableObject {
 
     init(cryptoService: CryptoServiceProtocol = CryptoService()) {
         self.cryptoService = cryptoService
+    }
+    
+    func initView() async {
+        print("Initializing view")
+        await loadCoins()
     }
 
     // MARK: - Load
@@ -70,6 +78,16 @@ final class DashboardViewModel: ObservableObject {
             errorMessage = apiError.localizedDescription
         } else {
             errorMessage = error.localizedDescription
+        }
+    }
+    
+    private func getCoinsFromData( _ data : Data) -> [Coin] {
+        do {
+            typealias CoinsResponse = CoinRankingResponse<CoinsContainer>
+            let decoded = try JSONDecoder().decode(CoinsResponse.self, from: data)
+            return decoded.data.coins
+        } catch {
+            return []
         }
     }
 }
